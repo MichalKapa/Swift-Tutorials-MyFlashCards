@@ -1035,11 +1035,11 @@ class ViewController: UIViewController {
         UserDefaults.standard.set(words1, forKey: "words1")
     }
     
-    func getWords0() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "words0")!
+    func getWords0() -> [String]? {
+        return UserDefaults.standard.stringArray(forKey: "words0")
     }
-    func getWords1() -> [String] {
-        return UserDefaults.standard.stringArray(forKey: "words1")!
+    func getWords1() -> [String]? {
+        return UserDefaults.standard.stringArray(forKey: "words1")
     }
     
     func getArrayFromTupple0Array(tuppleArray: (Array<(String, String)>)) -> [String] {
@@ -1065,10 +1065,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         currentId = getCurrentId()
         
-        let isDatabaseEmpty = getWords0() == []
-        
-        words0 = isDatabaseEmpty ? getArrayFromTupple0Array(tuppleArray: myWords) : getWords0()
-        words1 = isDatabaseEmpty ? getArrayFromTupple1Array(tuppleArray: myWords) : getWords1()
+        words0 = getWords0() ?? getArrayFromTupple0Array(tuppleArray: myWords)
+        words1 = getWords1() ?? getArrayFromTupple1Array(tuppleArray: myWords)
         updateLabel(isTranslationShown: false)
     }
     
